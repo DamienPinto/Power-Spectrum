@@ -8,8 +8,6 @@ The code in this repository contains a few useful functions for producing the po
 
 -The *Output Files* directory is where this program stores the power spectra it generates and their errors, hopefully with what are clear and indicative filenames.
 
-
-
 ##power\_spectrum\_to\_universe.py:
 This file only contains one fucntion that takes as input an array specifying a power spectrum and an integer indicating a number of dimensions and produces a distribution that follows the attributes specified by the given power spectrum and which spans the specified number of dimensions. This is done by populating a Fourier space according to the given power spectrum and then performing an inverse Fourier transform on it, but there are some random elements to the population process. As such, the produced distribution's power spectrum won't be an *exact* match to the one input, but it will haveroughly the same features.
 
