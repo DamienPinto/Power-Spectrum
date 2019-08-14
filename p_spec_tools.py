@@ -35,7 +35,7 @@ def make_power_spectrum(fourier_universe):
 					# print k, len(power_spectrum), k1+len(fourier_universe)/2, len(fourier_universe), k2+len(fourier_universe)/2, len(fourier_universe[k1]), k2+len(fourier_universe)/2, len(fourier_universe[k1][k2])
 					#...append the norm squared of that value to the correct array in the power_spectrum_log.
 					power_spectrum_log[k].append(float(np.abs(fourier_universe[int(k1+len(fourier_universe)/2)][int(k2+len(fourier_universe[k1])/2)][int(k3+len(fourier_universe[k1][k2])/2)])**2))
-					
+				
 			elif len(fourier_universe.shape) == 2:
 				k = int(round(float(math.sqrt(np.abs(k1)**2 + np.abs(k2)**2))))
 				power_spectrum_log[k].append(float(np.abs(fourier_universe[int(k1+len(fourier_universe)/2)][int(k2+len(fourier_universe[k1])/2)])))
@@ -72,15 +72,15 @@ def get_k_axis(L, N, dx, dim):
 
 	Input:
 		-L(float) : Value indicating side-length (in some units) of space from which one would like to get a power
-					spectrum.
+			    spectrum.
 		-N(int)   : Number of sampling intervals in said space.
 		-dx(float): Distance between sampling intervals, dx = L/N
 
 	Output:
 		-k(np.array)  : Array specifiying the range of possibly sampled wavenumbers, partitionned with appropriate step 
-						size given N, L, and dx.
+				size given N, L, and dx.
 		-k_min(float) : Smallest wavenumber possibly sampled given specifics of space (basically 0, because you can 
-						always just have a space filled with the same value everywhere regardless of its size).
+				always just have a space filled with the same value everywhere regardless of its size).
 		-k_max(float) : Largest wavenumber possibly sampled based on specifics of space and Nyquist frequecy.
 		-k_step(float): Step-size between possible 
 	'''
@@ -89,9 +89,9 @@ def get_k_axis(L, N, dx, dim):
 	k_max 	   = 2*math.pi/min_wvlgth #Maximum wavelength based o Nyquist frequency.
 	k_min 	   = 0
 	k_step	   = (k_max - k_min)/(N/2) #N/2 because np.fft.fftn returns a space of the same size as the input space 
-									   #and the origin of the fourier space is at (N/2, N/2), where every cell away from
-									   #the origin represents a specific wavenumber vector who's magnitude is found in 
-									   #[k_min, k_max] that was sampled.
+					   #and the origin of the fourier space is at (N/2, N/2), where every cell away from
+					   #the origin represents a specific wavenumber vector who's magnitude is found in 
+					   #[k_min, k_max] that was sampled.
 	
 	'''
 	Given that the fourier space created by np.fft.fftn is the same size as the distribution it's given, but has its 
@@ -142,22 +142,22 @@ def get_2Ddist_w_k_spike_pspec(L, N, k_spike_loc=-1, amplitude=200, gauss=1, sig
 	deviation (sigma).
 
 	Input:
-		-L(float)		   : Total length of space in the space's units.
-		-N(int)			   : Number of steps/divisions spanning one direction of the space (assumes all directions have 
-							 same number of steps)
+		-L(float)	   : Total length of space in the space's units.
+		-N(int)		   : Number of steps/divisions spanning one direction of the space (assumes all directions 
+				     have same number of steps)
 		-k_spike_loc(float): Location in 1/(units of L) indicatig the value at which to create a spike in the power 
-							 spectrum. The valid range for k-values given L and N will be computed and k_spike_loc must 
-							 be within this range.
+				     spectrum. The valid range for k-values given L and N will be computed and k_spike_loc 
+				     must be within this range.
 		-amplitude(float)  : Amplitude the spike in the power spectrum is to have. 
-							 NOTE: Currently seems to produce distributions with power spectrum amplitudes 1/100th this??
+				     NOTE: Currently seems to produce distributions with power spectrum amplitudes 1/100th this??
 		-gauss(int) 	   : On/Off on whether power spectrum spike is gaussian or just a pure delta.
 		-sigma(float)	   : Value indicating the standard deviation of gaussian modeling the power spectrum spike.
 
 	Output:
-		-dist_2D (np.ndarray): 2D array that was created from the power spectrum specified by the input parameters and 
-							   made to have a very similar power spectrum. Due to random elements in population/creation
-							   of space, it's power will not be EXACTLY like the one used to creat the space, but it 
-							   will have very similar features and characteristics.
+		-dist_2D (np.ndarray): 2D array that was created from the power spectrum specified by the input parameters 
+				       and made to have a very similar power spectrum. Due to random elements in 
+				       population/creation of space, it's power will not be EXACTLY like the one used to 
+				       creat the space, but it will have very similar features and characteristics.
 	'''
 
 	dx = L/N
