@@ -22,8 +22,8 @@ def make_power_spectrum(fourier_universe):
 
 	#Cycle through all the points in the Fourier transformed universe...
 	#Since what is given to the make_power_spectrum function is the Fourier space *after* the shifts, then the central 
-	#frequency should be the DC term, the first should be the most negative frequency, and the last should be the 
-	#largest positive frequncy.
+	#frequency should be the DC term, the first should be the most negative frequency, and the last should be the largest
+	#positive frequncy.
 	# print("Fourier_shape:", fourier_universe.shape)
 	for k1 in range(-int(fourier_universe.shape[0]/2-1), int(fourier_universe.shape[0]/2)):
 		for k2 in range(-int(fourier_universe.shape[1]/2-1), int(fourier_universe.shape[1]/2)):
@@ -65,22 +65,21 @@ def make_power_spectrum(fourier_universe):
 def get_k_axis(L, N, dx, dim):
 
 	'''
-	Function made to get the k_axis specified by L and N (which specify dx, but that is included as a param simply to 
-	avoid having to recalculate it. Q:is that more efficient or less? Or inconsequential?). In other words this function
-	returns the range of possible wavenumbers k that could be detected given a space of length L and N regularly spaced
-	sampling intervals.
+	Function made to get the k_axis specified by L and N (which specify dx, but that is included as a param simply to avoid 
+	having to recalculate it. Q:is that more efficient or less? Or inconsequential?). In other words this function returns 
+	the range of possible wavenumbers k that could be detected given a space of length L and N regularly spaced sampling 
+	intervals.
 
 	Input:
-		-L(float) : Value indicating side-length (in some units) of space from which one would like to get a power
-			    spectrum.
+		-L(float) : Value indicating side-length (in some units) of space from which one would like to get a power spectrum.
 		-N(int)   : Number of sampling intervals in said space.
 		-dx(float): Distance between sampling intervals, dx = L/N
 
 	Output:
 		-k(np.array)  : Array specifiying the range of possibly sampled wavenumbers, partitionned with appropriate step 
-				size given N, L, and dx.
+						size given N, L, and dx.
 		-k_min(float) : Smallest wavenumber possibly sampled given specifics of space (basically 0, because you can 
-				always just have a space filled with the same value everywhere regardless of its size).
+						always just have a space filled with the same value everywhere regardless of its size).
 		-k_max(float) : Largest wavenumber possibly sampled based on specifics of space and Nyquist frequecy.
 		-k_step(float): Step-size between possible 
 	'''
@@ -142,22 +141,22 @@ def get_2Ddist_w_k_spike_pspec(L, N, k_spike_loc=-1, amplitude=200, gauss=1, sig
 	deviation (sigma).
 
 	Input:
-		-L(float)	   : Total length of space in the space's units.
-		-N(int)		   : Number of steps/divisions spanning one direction of the space (assumes all directions 
-				     have same number of steps)
-		-k_spike_loc(float): Location in 1/(units of L) indicatig the value at which to create a spike in the power 
-				     spectrum. The valid range for k-values given L and N will be computed and k_spike_loc 
-				     must be within this range.
+		-L(float)	   	   : Total length of space in the space's units.
+		-N(int)		   	   : Number of steps/divisions spanning one direction of the space (assumes all directions 
+				     	 	 have same number of steps)
+		-k_spike_loc(float): Location in 1/(units of L) indicatig the value at which to create a spike in the power spectrum.
+							 The valid range for k-values given L and N will be computed and k_spike_loc must be within this
+							 range.
 		-amplitude(float)  : Amplitude the spike in the power spectrum is to have. 
-				     NOTE: Currently seems to produce distributions with power spectrum amplitudes 1/100th this??
+				     		 NOTE: Currently seems to produce distributions with power spectrum amplitudes 1/100th this??
 		-gauss(int) 	   : On/Off on whether power spectrum spike is gaussian or just a pure delta.
 		-sigma(float)	   : Value indicating the standard deviation of gaussian modeling the power spectrum spike.
 
 	Output:
-		-dist_2D (np.ndarray): 2D array that was created from the power spectrum specified by the input parameters 
-				       and made to have a very similar power spectrum. Due to random elements in 
-				       population/creation of space, it's power will not be EXACTLY like the one used to 
-				       creat the space, but it will have very similar features and characteristics.
+		-dist_2D (np.ndarray): 2D array that was created from the power spectrum specified by the input parameters and made 
+							   to have a very similar power spectrum. Due to random elements in population/creation of space,
+							   it's power will not be EXACTLY like the one used to create the space, but it will have very 
+							   similar features and characteristics.
 	'''
 
 	dx = L/N
