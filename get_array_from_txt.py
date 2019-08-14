@@ -10,13 +10,12 @@ Set of functions useful for retireving, so far, flattened arrays from txt files.
 
 Functions Present:
 	-str_list_to_np_array(input_str, dtype=np.float32):
-		*Function that takes a python list that has been directly transcribed to a string
-		and converts it to a numpy array with the specified data type (default np.float32).
+		*Function that takes a python list that has been directly transcribed to a string and converts it to a numpy
+		 array with the specified data type (default np.float32).
 
 	-get_array_from_txt_w_list(file_path, return_type="np"):
-		*Function that takes a flattened python list dirrectly translated to string form 
-		from the designated file and returns it as either a (default) numpy array, a python
-		list, or a PyTorch tensor.
+		*Function that takes a flattened python list dirrectly translated to string form from the designated file and
+		 returns it as either a (default) numpy array, a python list, or a PyTorch tensor.
 '''
 
 

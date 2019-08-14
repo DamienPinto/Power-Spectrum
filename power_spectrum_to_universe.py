@@ -25,10 +25,10 @@ def make_fourier_space(power_spectrum, dim):
 	# print(side_length)
 	# print(np.array(power_spectrum).shape)
 
-	#I know we discussed that spaces we use should have dimensions that are powers of two, however this method was used to 
-	#ensure that all k values can be used and that a vaue can also be placed at -k.
+	#I know we discussed that spaces we use should have dimensions that are powers of two, however this method was used 
+	#to ensure that all k values can be used and that a vaue can also be placed at -k.
 	#So, for example, for k = 3, we need a space to cell to insert a value at k1 = 3 but also k1 = -3.
-	#So I figured twice the k_max + 1 for the origin.
+	#So I figured twice the k_max - 1 (because the origin will fold on itself).
 	if dim == 3:
 		fourier_universe = np.zeros((2*side_length-1, 2*side_length-1, 2*side_length-1), dtype = complex)
 	elif dim == 2:
@@ -36,8 +36,8 @@ def make_fourier_space(power_spectrum, dim):
 	#Array containing arrays, each of which corresponds to a specific integer value of k.
 	shell_register   = [[] for _ in range(len(power_spectrum))]
 
-	#Go through all the coordinates, determine their integer distance from the origin and append that set of coordinates to 
-	#the shell_register in the corresponding array.
+	#Go through all the coordinates, determine their integer distance from the origin and append that set of coordinates
+	#to the shell_register in the corresponding array.
 	for k1 in range(-side_length+1, side_length):
 		for k2 in range(-side_length+1, side_length):
 			if len(fourier_universe.shape) == 3:
@@ -49,12 +49,13 @@ def make_fourier_space(power_spectrum, dim):
 
 	for i in range(len(shell_register)):
 
-		#Get list of coordinates with same value for their norm from the origin as well as the power spectrum value for that shell.
+		#Get list of coordinates with same value for their norm from the origin as well as the power spectrum value for 
+		#that shell.
 		norm_val_list = shell_register[i]
 		std_dev_sqrd  = power_spectrum[shell_register.index(shell_register[i])]
 
-		#Dr.Adrian's method of centering distributions around 0 and giving them the same standard deviation as the value of the 
-		#power spectrum
+		#Dr.Adrian's method of centering distributions around 0 and giving them the same standard deviation as the value
+		#of the power spectrum.
 		re_vals = np.random.normal(loc=0, scale=np.sqrt(std_dev_sqrd/2.0), size=len(norm_val_list))
 		im_vals = np.random.normal(loc=0, scale=np.sqrt(std_dev_sqrd/2.0), size=len(norm_val_list))
 
@@ -75,12 +76,12 @@ def make_fourier_space(power_spectrum, dim):
 			# enterred_val = np.complex(real_sign*np.sqrt(partitioning*vals[i]), complex_sign*np.sqrt((1-partitioning)*vals[i]))
 
 
-			#We thought of shifting here, but after experimenting with the fast fourier transform (fft) and inverse fast fourier transform (ifft)
-			#functions I saw that the output of fft and the input that ifft takes before the shifts is one where the first value is the origin,
-			#the next entry being the value for the next smallest frequecy in Fourier, then the next... once it reaches the largest grequecy in 
-			#the Fourier space it cycles back to the largest negative frequency, so kind of [0, f1, f2, ... fN, -fN, -fN-1, ... -f1] so if I saw that 
-			#correctly then this should work. However, this does lead to having to change the way I populate the fourier space in mock_power_spectrum.py
-			#though...
+			#We thought of shifting here, but after experimenting with the fast fourier transform (fft) and inverse fast
+			#fourier transform (ifft) functions I saw that the output of fft and the input that ifft takes before the 
+			#shifts is one where the first value is the origin, the next entry being the value for the next smallest 
+			#frequecy in Fourier, then the next... once it reaches the largest grequecy in the Fourier space it cycles 
+			#back to the largest negative frequency, so kind of [0, f1, f2, ... fN, -fN, -fN-1, ... -f1] so if I saw 
+			#that correctly then this should work.
 
 			if len(fourier_universe.shape) == 3:
 				fourier_universe[norm_val_list[j][0]][norm_val_list[j][1]][norm_val_list[j][2]]	= enterred_val

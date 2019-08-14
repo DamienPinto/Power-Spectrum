@@ -19,7 +19,8 @@ def get_gaussian_space(parameter_array):
 	ds = np.fromstring(parameter_array[1], sep=" ", dtype=np.int16).tolist()
 	# Ls: array representing the length the space is supposed to span in every direction.
 	Ls = np.fromstring(parameter_array[2], sep=" ", dtype=np.int16).tolist()
-	# mean, std_dev: mean and standard deviation used to parametrize the normal/Gaussian distribution from with the space will be sampled.
+	#mean, std_dev: mean and standard deviation used to parametrize the normal/Gaussian distribution from with the
+	#space will be sampled.
 	[mean, std_dev] = np.fromstring(parameter_array[3], sep=" ", dtype=np.float32).tolist()
 
 	# Ns: array representing number of steps in each direction.
@@ -109,7 +110,8 @@ def main():
 			parameter_array = parameter_str.split("\n")
 			print(parameter_array[0])
 
-			# The first line in the parameter file is expected to be a string indicating the type of sidtribution to be generated.
+			# The first line in the parameter file is expected to be a string indicating the type of sidtribution to be
+			# generated.
 			if parameter_array[0] == "gaussian":
 				# If this is where the first line of the file read, expect the rest of the file to be of the format:
 				'''
@@ -117,7 +119,8 @@ def main():
 				(2 or 3 floats separated by spaces)
 				(2 floats separated by spaces)
 				
-				These will be used to create 2 or 3 dimensional array populated with values sampled from a Gaussian/normal distribution.
+				These will be used to create 2 or 3 dimensional array populated with values sampled from a 
+				Gaussian/normal distribution.
 				'''
 
 				k, distribution, fourier_dist, out_filename = get_gaussian_space(parameter_array)
@@ -127,7 +130,8 @@ def main():
 				'''
 				(3 floats indicating k, dx, and direc)
 
-				This will be used to created a 2D distribution representing either a vertical, horizontal, or diagonal sin wave .
+				This will be used to created a 2D distribution representing either a vertical, horizontal, or diagonal 
+				sin wave.
 				k(float): wavenumber, follows k = 2*pi/(lambda) where lambda is the wavelength of the wave to be created.
 				L(float): parameter indicating the length in appropriate units of the side-length of the space to be generated
 				N(int)  : parameter indicating the number of steps/pixels per side of the space to be generated
