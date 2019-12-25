@@ -5,7 +5,7 @@ import sys
 import numpy.random
 import matplotlib.pyplot as plt
 from p_spec_tools import make_power_spectrum
-from get_array_from_txt import get_array_from_txt_w_list, str_array_to_np_array
+from get_array_from_txt import get_array_from_txt_w_list
 
 
 #Receive a power spectrum as an array where each value is the std_dev squared of the Gaussian noise distribution
