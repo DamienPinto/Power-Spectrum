@@ -178,7 +178,7 @@ def get_2Ddist_w_k_spike_pspec(L, N, k_spike_loc=-1, amplitude=200, gauss=1, sig
 			p_spec 	= get_1D_gauss(k, k_spike_loc, sigma, amplitude)
 		else:
 			p_spec 	= np.zeros(len(k))
-			p_spec[k_spike_idx] = magnitude
+			p_spec[k_spike_idx] = amplitude
 		# print("k_spike_loc: ", k_spike_loc)
 		# plt.plot(k, p_spec)
 		dist_2D 	= get_dist_from_p_spec(p_spec, 2)
