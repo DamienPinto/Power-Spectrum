@@ -104,10 +104,10 @@ def make_fourier_space(power_spectrum, dim):
 
 def main():
 	p_spec_filename = sys.argv[1]
-	errs_filename   = sys.argv[2]
-	dim 			= int(sys.argv[3])
-
-	if os.path.isfile(DATA_DIR + p_spec_filename) and os.path.isfile(DATA_DIR + errs_filename):
+#	errs_filename   = sys.argv[2] #if you want to use errors in your distribution generation
+	dim 			= int(sys.argv[2])
+#													if you want to include errors in your distribution generation.
+	if os.path.isfile(DATA_DIR + p_spec_filename): # and os.path.isfile(DATA_DIR + errs_filename):
 		print("Retrieving Power Spectrum and Errors")
 		p_spec 		= get_array_from_txt_w_list(DATA_DIR + p_spec_filename)
 		p_spec_errs = get_array_from_txt_w_list(DATA_DIR + errs_filename)
